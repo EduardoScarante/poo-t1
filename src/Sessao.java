@@ -1,17 +1,12 @@
+import java.time.LocalDateTime;
 
 public class Sessao {
 	private Filme filme;
 	private Local local;
 	private float preco;
-	
-	// opcional
 	private String comentario;
-	// ter um atributo comentário no filme OU Sessão
-	// se feito nos dois, é bônus
+	private LocalDateTime data_hora; 
 	
-	// PRECISA guardar a DATA e HORÁRIO da sessão
-	// opcao 1, LocalDateTime 
-	// opcao 2, separa em 2, LocalDate, LocalTime
 	
 
 }
