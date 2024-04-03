@@ -7,7 +7,6 @@ import java.util.Iterator;
 public class Lista implements Iterable<Sessao>{
 	private ArrayList<Sessao> lista;
 
-
 	public Lista() {
 		lista = new ArrayList<Sessao>();
 	}

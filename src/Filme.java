@@ -52,24 +52,8 @@ public class Filme implements Comparable<Filme> {
 		this.genero = genero;
 	}
 
-	// ToString
-
-	@java.lang.Override
-	public java.lang.String toString() {
-		return "Filme{" +
-				"filme='" + filme + '\'' +
-				", nota=" + nota +
-				", favorito=" + favorito +
-				", comentario='" + comentario + '\'' +
-				", genero='" + genero + '\'' +
-				'}';
-	}
-
-	
 	@Override
-	public int compareTo(Filme filme) {
-		// TODO 
-		return 0;
+	public java.lang.String toString() {
+		return "Filme: " + filme + " | " + "Genero: " + genero;
 	}
-
 }

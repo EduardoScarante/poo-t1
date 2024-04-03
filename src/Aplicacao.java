@@ -6,11 +6,13 @@ import java.util.Scanner;
 public class Aplicacao {
 	private static Scanner teclado = new Scanner(System.in);
 
-	private static Lista lista; 
-	private static ArrayList<Local> locais = new ArrayList<>();
+	private static Lista lista;
+	private static Local locais;
 
 	public static void main(String[] args) {
 		lista = new Lista();
+		locais = new Local();
+
 		int opcao;
 
 		setarLocaisDefault();
@@ -25,6 +27,7 @@ public class Aplicacao {
 			System.out.println("5 - Listagem ordem avaliação");
 			System.out.println("6 - Listagem cronológica");
 			System.out.println("7 - Listagem favoritos");
+			System.out.println("8 - Extra - Listagem locais");
 			System.out.print("\n>> Opcao?  ");
 
 			opcao = teclado.nextInt();
@@ -46,23 +49,38 @@ public class Aplicacao {
 					break;
 				case 7:
 					break;
+				case 8:
+					escolherLocal();
+					break;
 			}
 		} while (opcao != 0);
 
 	}
 
-	public static void setarLocaisDefault(){
-		locais.add(new Local(0, "Jockey Placa", "Cinemark", "um bom lugar"));
-		locais.add(new Local(1, "Cidade", "Cinemark da China", "lugar bem ruim"));
+	public static void setarLocaisDefault() {
+		locais.add(new Local("Jockey Placa", "Cinemark", "um bom lugar"));
+		locais.add(new Local("Cidade", "Cinemark da China", "lugar bem ruim"));
 	}
 
-	public static void MostrarFilmesCadastrados(){
-		System.out.println("\n*** Listagem de filmes ***\n");
-        Iterator<Sessao> ic = lista.iterator();
-        while (ic.hasNext()){ 
-            Sessao sessao = ic.next(); 
-            System.out.println(sessao.toString());
-        }
+	public static void MostrarFilmesCadastrados() {
+		System.out.println("\n*** Listagem de Filmes ***\n");
+		Iterator<Sessao> il = lista.iterator();
+		while (il.hasNext()) {
+			Sessao sessao = il.next();
+			System.out.println(sessao.getFilme().toString());
+		}
+
+		System.out.print("\nQual foi o nome do filme? \n");
+		String filme = teclado.nextLine();
+		for (Sessao sessao: lista){
+			if (sessao.getFilme().getFilme().toUpperCase().contains(filme.toUpperCase())){
+				System.out.println("Achei "+ sessao.getFilme().toString());
+				System.out.println("É o filme procurado <S/N>? ");
+				String conf = teclado.nextLine();
+				if (conf.toUpperCase().charAt(0)=='S')
+					System.out.println(sessao.toString());
+			}
+		}
 	}
 
 	public static Sessao CadastrarSessao() {
@@ -87,8 +105,17 @@ public class Aplicacao {
 
 		Local localDaSessao = escolherLocal();
 
-		Filme filmeCadastrado = new Filme(filme, Integer.valueOf(nota), Boolean.valueOf(favorito), comentarioDoFilme, genero);
+		Filme filmeCadastrado = new Filme(filme, Integer.valueOf(nota), Boolean.valueOf(favorito), comentarioDoFilme,
+				genero);
 		return (new Sessao(filmeCadastrado, localDaSessao, Integer.valueOf(preco), comentarioSessao, dataEhora));
+	}
+
+	public static void mostrarLocais() {
+		Iterator<Local> il = locais.iterator();
+		while (il.hasNext()) {
+			Local locais = il.next();
+			System.out.println(locais.toString());
+		}
 	}
 
 	public static Local escolherLocal(){
@@ -100,12 +127,28 @@ public class Aplicacao {
             System.out.println(locais.toString());
         }
 
-		System.out.print("Qual foi o id do local da sessão? [id] \n");
-		System.out.print("Se nenhum: n \n");
+		System.out.print("\nQual foi o nome do local da sessão? Se nenhum?! P/ cadastrar digite 'new' p/ cadastrar \n");
+	
+		String nomeLocal = teclado.nextLine();
+		for (Local local: locais){
+			if (local.getLocal().toUpperCase().contains(nomeLocal.toUpperCase())){
+				System.out.println("Achei "+ local.getLocal());
+				System.out.println("É o local procurado <S/N>? ");
+				String conf = teclado.nextLine();
+				if (conf.toUpperCase().charAt(0)=='S')
+					return local;
+			}
+		}
 
-		
-		String localId = teclado.nextLine();
+		if(nomeLocal == "new"){
+			System.out.print("Nome do lugar: \n");
+			String lugar = teclado.nextLine();
+			System.out.print("Nome da Franquia: \n");
+			String franquia = teclado.nextLine();
+			System.out.print("Comentário sobre o local: \n");
+			String comentarioLocal = teclado.nextLine();
+			return (new Local(lugar, franquia, comentarioLocal));
+		}
 
-		return locais.get(Integer.valueOf(localId));
-	}
-}
+		return new Local();
+}}

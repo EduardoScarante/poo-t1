@@ -1,6 +1,6 @@
 import java.time.LocalDateTime;
 
-public class Sessao {
+public class Sessao{
 	private Filme filme;
 	private Local local;
 	private float preco;
@@ -57,12 +57,24 @@ public class Sessao {
 
 	@java.lang.Override
 	public java.lang.String toString() {
-		return "Sessao{" +
-				"filme=" + filme +
-				", local=" + local +
-				", preco=" + preco +
-				", comentario='" + comentario + '\'' +
-				", data_hora=" + data_hora +
-				'}';
+		return "******* Filme ***** \n\n" +
+				"Nome: " + filme.getFilme() +
+				"\nFavorito: " + "IMPLEMENTAR" +
+				"\nData: " + data_hora +
+				"\nPreço: " + preco +
+				"\nLocal: " + local + 
+				"\nComentário da Sessão: " + comentario + 
+				"\nComentário do Filme: " + filme.getComentario();
 	}
+
+
+	/* Nome: Capitã Marvel
+	Nota: 4
+	Favorito: não
+	Data: 17/mar/2022, dom – 21h30
+	Preço: R$ 15,00
+	Local: Pátio Batel
+	Comentário do filme: Superou a expectativa, apresentou bem a personagem e seus poderes, o que servirá para 
+   encaixar a personagem no cânone do UCM.
+	Comentário da sessão: Apesar do horário tardio o cinema estava lotado, antes do filme fomos ao BK lanchar. */
 }
