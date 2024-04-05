@@ -1,5 +1,5 @@
 
-public class Filme implements Comparable<Filme> {
+public class Filme {
 	private String filme;
 	private int nota; // de 0 a 5
 	private boolean favorito;
@@ -16,7 +16,6 @@ public class Filme implements Comparable<Filme> {
 	}
 
 	// Getters
-
 	public String getFilme() {
 		return filme;
 	}
@@ -34,7 +33,6 @@ public class Filme implements Comparable<Filme> {
 	}
 
 	// Setters
-	
 	public void setFilme(String filme) {
 		this.filme = filme;
 	}
@@ -52,8 +50,13 @@ public class Filme implements Comparable<Filme> {
 		this.genero = genero;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.String toString() {
-		return "Filme: " + filme + " | " + "Genero: " + genero;
+		return "******* Filme ***** \n\n" +
+				"Nome: " + filme +
+				"\nNota: " + nota +
+				"\nFavoritos: " + favorito +
+				"\nComentário do Filme: " + comentario +
+				"\nGênero: " + genero ;
 	}
 }

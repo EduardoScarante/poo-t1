@@ -1,13 +1,14 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class Sessao{
+public class Sessao implements Comparable<Sessao>{
 	private Filme filme;
 	private Local local;
 	private float preco;
 	private String comentario;
-	private String data_hora;
+	private LocalDateTime data_hora;
 
-	public Sessao(Filme filme, Local local, float preco, String comentario, String data_hora) {
+	public Sessao(Filme filme, Local local, float preco, String comentario, LocalDateTime data_hora) {
 		this.filme = filme;
 		this.local = local;
 		this.preco = preco;
@@ -18,63 +19,66 @@ public class Sessao{
 	public Filme getFilme() {
 		return filme;
 	}
-
+	
 	public void setFilme(Filme filme) {
 		this.filme = filme;
 	}
-
+	
 	public Local getLocal() {
 		return local;
 	}
-
+	
 	public void setLocal(Local local) {
 		this.local = local;
 	}
-
+	
 	public float getPreco() {
 		return preco;
 	}
-
+	
 	public void setPreco(float preco) {
 		this.preco = preco;
 	}
-
+	
 	public String getComentario() {
 		return comentario;
 	}
-
+	
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
-
-	public String getData_hora() {
+	
+	public LocalDateTime getData_hora() {
 		return data_hora;
 	}
-
-	public void setData_hora(String data_hora) {
+	
+	public void setData_hora(LocalDateTime data_hora) {
 		this.data_hora = data_hora;
 	}
 
-	@java.lang.Override
+/* 	@java.lang.Override
 	public java.lang.String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy, EEE - HH'h'mm");
 		return "******* Filme ***** \n\n" +
 				"Nome: " + filme.getFilme() +
-				"\nFavorito: " + "IMPLEMENTAR" +
-				"\nData: " + data_hora +
+				"\nNota: " + filme.getNota() +
+				"\nFavorito: " + filme.isFavorito() +
+				"\nData: " + data_hora.format(formatter) +
 				"\nPreço: " + preco +
-				"\nLocal: " + local + 
-				"\nComentário da Sessão: " + comentario + 
+				"\nLocal: " + local +
+				"\nComentário da Sessão: " + comentario +
 				"\nComentário do Filme: " + filme.getComentario();
+	} */
+
+	@java.lang.Override
+	public java.lang.String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy, EEE - HH'h'mm");
+		return filme.getFilme() + " (" + data_hora.format(formatter) + ") - " + local.getLocal() + " - " + local.getFranquia();
 	}
+	
 
-
-	/* Nome: Capitã Marvel
-	Nota: 4
-	Favorito: não
-	Data: 17/mar/2022, dom – 21h30
-	Preço: R$ 15,00
-	Local: Pátio Batel
-	Comentário do filme: Superou a expectativa, apresentou bem a personagem e seus poderes, o que servirá para 
-   encaixar a personagem no cânone do UCM.
-	Comentário da sessão: Apesar do horário tardio o cinema estava lotado, antes do filme fomos ao BK lanchar. */
+	@Override
+    public int compareTo(Sessao sessao) {
+        return this.filme.getFilme().compareToIgnoreCase(sessao.getFilme().getFilme());
+    }
 }
