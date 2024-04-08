@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -7,11 +8,10 @@ public class Aplicacao {
 	private static Scanner teclado = new Scanner(System.in);
 
 	private static Lista lista;
-	private static Local locais;
+	private static ArrayList<Local> locais = new ArrayList<>();
 
 	public static void main(String[] args) {
 		lista = new Lista();
-		locais = new Local();
 
 		int opcao;
 
@@ -56,7 +56,7 @@ public class Aplicacao {
 					mostrarFilmeOrdemCronologica();
 					break;
 				case 7:
-					System.out.println("**** Meu Favoritos");
+					System.out.println("**** Meus Filmes Favoritos");
 					mostrarFavoritos();
 					break;
 				case 8:
@@ -164,6 +164,7 @@ public class Aplicacao {
 				dataEHoraFormatada));
 	}
 
+	// MOSTRA LOCAIS CADASTRADOS
 	public static void mostrarLocais() {
 		Iterator<Local> il = locais.iterator();
 		while (il.hasNext()) {
@@ -172,6 +173,7 @@ public class Aplicacao {
 		}
 	}
 
+	// ESCOLHE LOCAL OU CADASTRA UM NOVO
 	public static Local escolherLocal() {
 		System.out.println("\n*** Listagem de Locais ***\n");
 		Iterator<Local> il = locais.iterator();
@@ -182,7 +184,7 @@ public class Aplicacao {
 		}
 
 		System.out
-				.print("\nQual foi o nome do local da sessão? Se nenhum?! P/ cadastrar digite 'novo' p/ cadastrar \n");
+				.print("\nQual foi o nome do local da sessão? Se nenhum?! P/ cadastrar digite 'S' p/ cadastrar \n");
 
 		String nomeLocal = teclado.nextLine();
 		for (Local local : locais) {
@@ -191,17 +193,17 @@ public class Aplicacao {
 				System.out.println("É o local procurado <S/N>? ");
 				String conf = teclado.nextLine();
 				if (conf.toUpperCase().charAt(0) == 'S')
-					return local;
+					locais.add(local);
+					return null;
 			}
 		}
 
-		System.out.println(String.valueOf(nomeLocal) == "novo");
-		if (nomeLocal.toUpperCase() == "novo") {
-			System.out.print("Nome do lugar: \n");
+		if (nomeLocal.toUpperCase().charAt(0)=='S') {
+			System.out.print("Nome do lugar: ");
 			String lugar = teclado.nextLine();
-			System.out.print("Nome da Franquia: \n");
+			System.out.print("Nome da Franquia: ");
 			String franquia = teclado.nextLine();
-			System.out.print("Comentário sobre o local: \n");
+			System.out.print("Comentário sobre o local: ");
 			String comentarioLocal = teclado.nextLine();
 			return (new Local(lugar, franquia, comentarioLocal));
 		}
@@ -221,15 +223,16 @@ public class Aplicacao {
 				System.out.println("É o filme procurado <S/N>? ");
 				String conf = teclado.nextLine();
 				if (conf.toUpperCase().charAt(0) == 'S') {
+					String IsFavorito = sessao.getFilme().isFavorito() ? "Sim" : "Não";
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy, EEE - HH'h'mm");
 					System.out.println(
 							"******* Filme ***** \n\n" +
 									"Nome: " + sessao.getFilme().getFilme() +
 									"\nNota: " + sessao.getFilme().getNota() +
-									"\nFavorito: " + sessao.getFilme().isFavorito() +
+									"\nFavorito: " + IsFavorito +
 									"\nData: " + sessao.getData_hora().format(formatter) +
 									"\nPreço: " + sessao.getPreco() +
-									"\nLocal: " + sessao.getLocal() +
+									"\nLocal: " + sessao.getLocal().getLocal() + " - " + sessao.getLocal().getFranquia()+
 									"\nComentário da Sessão: " + sessao.getComentario() +
 									"\nComentário do Filme: " + sessao.getFilme().getComentario());
 				}

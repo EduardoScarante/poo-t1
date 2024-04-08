@@ -8,6 +8,7 @@ public class Sessao implements Comparable<Sessao>{
 	private String comentario;
 	private LocalDateTime data_hora;
 
+	//CONSTRUTOR
 	public Sessao(Filme filme, Local local, float preco, String comentario, LocalDateTime data_hora) {
 		this.filme = filme;
 		this.local = local;
@@ -16,67 +17,56 @@ public class Sessao implements Comparable<Sessao>{
 		this.data_hora = data_hora;
 	}
 
+	// GETTERS
+
 	public Filme getFilme() {
 		return filme;
 	}
-	
-	public void setFilme(Filme filme) {
-		this.filme = filme;
-	}
-	
+
 	public Local getLocal() {
 		return local;
-	}
-	
-	public void setLocal(Local local) {
-		this.local = local;
 	}
 	
 	public float getPreco() {
 		return preco;
 	}
 	
-	public void setPreco(float preco) {
-		this.preco = preco;
-	}
-	
 	public String getComentario() {
 		return comentario;
 	}
-	
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
-	}
-	
+		
 	public LocalDateTime getData_hora() {
 		return data_hora;
 	}
-	
+
+	//SETTERS
+	public void setLocal(Local local) {
+		this.local = local;
+	}
+
+	public void setPreco(float preco) {
+		this.preco = preco;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
 	public void setData_hora(LocalDateTime data_hora) {
 		this.data_hora = data_hora;
 	}
 
-/* 	@java.lang.Override
-	public java.lang.String toString() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy, EEE - HH'h'mm");
-		return "******* Filme ***** \n\n" +
-				"Nome: " + filme.getFilme() +
-				"\nNota: " + filme.getNota() +
-				"\nFavorito: " + filme.isFavorito() +
-				"\nData: " + data_hora.format(formatter) +
-				"\nPreço: " + preco +
-				"\nLocal: " + local +
-				"\nComentário da Sessão: " + comentario +
-				"\nComentário do Filme: " + filme.getComentario();
-	} */
+	public void setFilme(Filme filme) {
+		this.filme = filme;
+	}
 
-	@java.lang.Override
+
+	@Override
 	public java.lang.String toString() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy, EEE - HH'h'mm");
 		return filme.getFilme() + " (" + data_hora.format(formatter) + ") - " + local.getLocal() + " - " + local.getFranquia();
 	}
 	
-
 	@Override
     public int compareTo(Sessao sessao) {
         return this.filme.getFilme().compareToIgnoreCase(sessao.getFilme().getFilme());

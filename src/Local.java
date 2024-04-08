@@ -1,30 +1,15 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-
-public class Local implements Iterable<Local>, Comparable<Local>{
+public class Local{
 	private String local; 
 	private String franquia; 
 	private String comentarios;
 
-	private ArrayList<Local> listaLocais;
 
-	public Local() {
-		listaLocais = new ArrayList<Local>();
+	//CONSTRUTORES
+	public Local(){
+		this.local = "Não Informado";
+		this.franquia = "Não Informado";
+		this.comentarios = "Não Informado";
 	}
-
-	public void add(Local local){
-        listaLocais.add(local);
-    }
-
-	public Local getLocal(Integer i) {
-		return listaLocais.get(i);
-	}
-
-
-	@Override
-    public Iterator<Local> iterator() {
-        return listaLocais.iterator();
-    }
 
 
 	public Local(String local, String franquia, String comentarios) {
@@ -33,46 +18,37 @@ public class Local implements Iterable<Local>, Comparable<Local>{
 		this.comentarios = comentarios;
 	}
 
+
+	// GETTERS
 	public String getLocal() {
 		return local;
-	}
-
-	public void setLocal(String local) {
-		this.local = local;
 	}
 
 	public String getFranquia() {
 		return franquia;
 	}
 
-	public void setFranquia(String franquia) {
-		this.franquia = franquia;
-	}
-
 	public String getComentarios() {
 		return comentarios;
+	}
+
+	// SETTERS
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
+	public void setFranquia(String franquia) {
+		this.franquia = franquia;
 	}
 
 	public void setComentarios(String comentarios) {
 		this.comentarios = comentarios;
 	}
 
-	public ArrayList<Local> getListaLocais() {
-		return listaLocais;
-	}
-
-	public void setListaLocais(ArrayList<Local> listaLocais) {
-		this.listaLocais = listaLocais;
-	}
-
-	@java.lang.Override
-	public java.lang.String toString() {
-		return local + " - " + franquia + " - " +  comentarios;
-	}
 
 	@Override
-    public int compareTo(Local local) {
-        return this.local.compareToIgnoreCase(local.local);
-    }
+	public String toString() {
+		return local + " - " + franquia + " - " +  comentarios;
+	}
 
 }
